@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private Rigidbody2D rigidBody;
+   
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        Debug.Log("game has started");
+        rigidBody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown("space")) //jump movement, only when space key is down
+        float directionX = Input.GetAxisRaw("Horizontal");
+        rigidBody.velocity = new Vector2(directionX * 7f,rigidBody.velocity.y); //moving left or right
+
+        if (Input.GetButtonDown("Jump")) //jump movement, only when space key is down
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 14, 0); //changing the velocity
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, 14f); //changing the velocity
         }
     }
 }
