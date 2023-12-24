@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask jumpableGround;
 
     private enum MovementState { idle, running, jumping, falling }
+
+    [SerializeField] private AudioSource jumpSoundEffect;
     
 
     // Start is called before the first frame update
@@ -35,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded()) //jump movement, only when space key is down
         {
+            jumpSoundEffect.Play();
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce); //changing the velocity
         }
         UpdateAnimation();
